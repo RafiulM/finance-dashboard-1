@@ -1,14 +1,12 @@
 flowchart TD
-  Start[Landing Page]
-  SignUpPage[Sign Up Page]
-  SignInPage[Sign In Page]
-  AuthAPI[Authentication API Endpoint]
-  DashboardPage[Dashboard Page]
-  Start -->|Select Sign Up| SignUpPage
-  Start -->|Select Sign In| SignInPage
-  SignUpPage -->|Submit Credentials| AuthAPI
-  SignInPage -->|Submit Credentials| AuthAPI
-  AuthAPI -->|Success| DashboardPage
-  AuthAPI -->|Error| SignUpPage
-  AuthAPI -->|Error| SignInPage
-  DashboardPage -->|Click Logout| Start
+  A[Landing Page] --> B{New or Existing User}
+  B -->|New| C[Sign Up Page]
+  B -->|Existing| D[Sign In Page]
+  C --> E[Submit Credentials]
+  D --> E
+  E --> F[Auth API]
+  F --> G{Auth Successful}
+  G -->|Yes| H[Dashboard Page]
+  G -->|No| I[Error Message]
+  H --> J[Logout]
+  J --> D
